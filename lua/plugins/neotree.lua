@@ -7,10 +7,15 @@ return {
             "MunifTanjim/nui.nvim"
         },
         config = function()
-            vim.keymap.set('n', '<leader>e', ':Neotree toggle current reveal_force_cwd<cr>')
+            vim.keymap.set('n', '<leader>e', ':Neotree focus<cr>', { desc = "Neotree Focus", noremap = true, silent = true })
             require("neo-tree").setup({
-                close_if_last_window = true,
+                close_if_last_window = false,
                 indent_marker = "│",
+               filesystem = {
+                    follow_current_file = {
+                        enabled = true
+                    }
+                }
             })
         end
     }
