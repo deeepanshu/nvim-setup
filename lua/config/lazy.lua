@@ -39,3 +39,5 @@ require("lazy").setup({
     },
   },
 })
+
+vim.api.nvim_set_keymap('n', '<leader>l', ':Lazy<CR>', { desc = "Open Lazy", noremap = true, silent = true })
