@@ -4,48 +4,48 @@
 
 -- ###### neotests #####
 -- for current test
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>tr",
-  '<cmd>lua require("neotest").run.run()<CR>',
-  { noremap = true, silent = true }
-)
--- for all tests in current file
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>tt",
-  '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>',
-  { noremap = true, silent = true }
-)
--- for the nearest test to cursor
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>tn",
-  '<cmd>lua require("neotest").run.run({strategy = "nearest"})<CR>',
-  { noremap = true, silent = true }
-)
--- for toggling the summary window
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>ts",
-  '<cmd>lua require("neotest").summary.toggle()<CR>',
-  { noremap = true, silent = true }
-)
--- for toggling the output_panel
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>tp",
-  '<cmd>lua require("neotest").output_panel.toggle()<CR>',
-  { noremap = true, silent = true }
-)
--- for toggling the output for single test
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>to",
-  '<cmd>lua require("neotest").output.open({ short = true })<CR>',
-  { noremap = true, silent = true }
-)
-
+--vim.api.nvim_set_keymap(
+--  "n",
+--  "<leader>tr",
+--  '<cmd>lua require("neotest").run.run()<CR>',
+--  { noremap = true, silent = true }
+--)
+---- for all tests in current file
+--vim.api.nvim_set_keymap(
+--  "n",
+--  "<leader>tt",
+--  '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>',
+--  { noremap = true, silent = true }
+--)
+---- for the nearest test to cursor
+--vim.api.nvim_set_keymap(
+--  "n",
+--  "<leader>tn",
+--  '<cmd>lua require("neotest").run.run({strategy = "nearest"})<CR>',
+--  { noremap = true, silent = true }
+--)
+---- for toggling the summary window
+--vim.api.nvim_set_keymap(
+--  "n",
+--  "<leader>ts",
+--  '<cmd>lua require("neotest").summary.toggle()<CR>',
+--  { noremap = true, silent = true }
+--)
+---- for toggling the output_panel
+--vim.api.nvim_set_keymap(
+--  "n",
+--  "<leader>tp",
+--  '<cmd>lua require("neotest").output_panel.toggle()<CR>',
+--  { noremap = true, silent = true }
+--)
+---- for toggling the output for single test
+--vim.api.nvim_set_keymap(
+--  "n",
+--  "<leader>to",
+--  '<cmd>lua require("neotest").output.open({ short = true })<CR>',
+--  { noremap = true, silent = true }
+--)
+--
 -- ##### code #####
 -- format code
 vim.api.nvim_set_keymap(
@@ -54,3 +54,6 @@ vim.api.nvim_set_keymap(
   "<cmd>lua vim.lsp.buf.format({ async = true })<CR>",
   { noremap = true, silent = true }
 )
+
+-- ###### undotree #####
+vim.api.nvim_set_keymap("n", "<leader><F5>", "<cmd>UndotreeToggle<CR>", { noremap = true, silent = true })
