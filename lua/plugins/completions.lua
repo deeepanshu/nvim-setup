@@ -1,21 +1,40 @@
 return {
-    {
-        "hrsh7th/cmp-nvim-lsp",
-    },
-    {
-        "L3MON4D3/LuaSnip",
-        dependencies = {
-            "saadparwaiz1/cmp_luasnip",
-            "rafamadriz/friendly-snippets",
-        },
-    },
-    {
-        "hrsh7th/cmp-path",
-    },
+    --    {
+    --        "hrsh7th/cmp-path",
+    --        "hrsh7th/cmp-nvim-lua",
+    --        "hrsh7th/cmp-nvim-lsp",
+    --        "hrsh7th/cmp-buffer",
+    --        {
+    --            "L3MON4D3/LuaSnip",
+    --            dependencies = {
+    --                "saadparwaiz1/cmp_luasnip",
+    --                "rafamadriz/friendly-snippets",
+    --            },
+    --            build = "make install_jsregexp",
+    --        },
+    --    },
     {
         "hrsh7th/nvim-cmp",
+        event = { "InsertEnter", "CmdlineEnter" },
+        dependencies = {
+            "onsails/lspkind.nvim",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "saadparwaiz1/cmp_luasnip",
+            {
+                "L3MON4D3/LuaSnip",
+                dependencies = {
+                    "saadparwaiz1/cmp_luasnip",
+                    "rafamadriz/friendly-snippets",
+                },
+                build = "make install_jsregexp",
+            },
+        },
         config = function()
             local cmp = require("cmp")
+            local lspkind = require("lspkind")
             require("luasnip.loaders.from_vscode").lazy_load()
             cmp.setup({
                 snippet = {
@@ -40,6 +59,17 @@ return {
                 }, {
                     { name = "buffer" },
                 }),
+                formatting = {
+                    format = lspkind.cmp_format({
+                        mode = "symbol",
+                        maxwidth = {
+                            menu = 50,
+                            abbr = 50,
+                        },
+                        ellipsis_char = "...",
+                        show_labelDetails = true,
+                    }),
+                },
             })
 
             -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
