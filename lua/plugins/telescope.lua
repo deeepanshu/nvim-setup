@@ -39,11 +39,11 @@ return {
             })
 
             telescope.load_extension("fzf")
-            setKeymaps("n", "<leader>ff", builtin.find_files, "Find files")
-            setKeymaps("n", "<leader>fs", builtin.live_grep, "Find string in cwd")
-            setKeymaps("n", "<leader>fc", builtin.grep_string, "Find string under cursor in cwd")
-            setKeymaps("n", "<leader>fb", builtin.buffers, "Telescope buffers")
-            setKeymaps("n", "<leader>fh", builtin.help_tags, "Telescope help tags")
+            setKeymap("n", "<leader>ff", builtin.find_files, "Find files")
+            setKeymap("n", "<leader>fs", builtin.live_grep, "Find string in cwd")
+            setKeymap("n", "<leader>fc", builtin.grep_string, "Find string under cursor in cwd")
+            setKeymap("n", "<leader>fb", builtin.buffers, "Telescope buffers")
+            setKeymap("n", "<leader>fh", builtin.help_tags, "Telescope help tags")
         end,
     },
     {

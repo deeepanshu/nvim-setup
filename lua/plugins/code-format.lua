@@ -51,11 +51,11 @@ return {
         config = function()
             local todo_comments = require("todo-comments")
 
-            setKeymaps("n", "]t", function()
+            setKeymap("n", "]t", function()
                 todo_comments.jump_next()
             end, "Next todo comment")
 
-            setKeymaps("n", "[t", function()
+            setKeymap("n", "[t", function()
                 todo_comments.jump_prev()
             end, "Prev todo comment")
 

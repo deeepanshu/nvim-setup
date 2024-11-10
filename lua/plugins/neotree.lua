@@ -7,7 +7,7 @@ return {
             "MunifTanjim/nui.nvim"
         },
         config = function()
-            setKeymaps('n', '<leader>e', ':Neotree focus<cr>', "Neotree Focus")
+            setKeymap('n', '<leader>e', ':Neotree focus<cr>', "Neotree Focus")
             require("neo-tree").setup({
                 close_if_last_window = false,
                 indent_marker = "│",
