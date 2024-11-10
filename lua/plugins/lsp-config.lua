@@ -27,10 +27,10 @@ return {
             lspconfig.graphql.setup({
                 capabilities = capabilities,
             })
-            vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-            vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-            vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
-            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+            setKeymaps("n", "K", vim.lsp.buf.hover, "Open Documentation")
+            setKeymaps("n", "gd", vim.lsp.buf.definition, "Go to definition")
+            setKeymaps("n", "gr", vim.lsp.buf.references, "Go to references")
+            setKeymaps("n", "<leader>ca", vim.lsp.buf.code_action, "Open Code Actions")
         end,
     },
 }

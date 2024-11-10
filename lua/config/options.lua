@@ -11,3 +11,18 @@ vim.cmd("set relativenumber")
 vim.cmd("set clipboard+=unnamedplus")
 vim.cmd("set cursorline")
 vim.g.mapleader = " "
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.autoindent = true
+vim.opt.background = "dark"
+vim.opt.signcolumn = "yes"
+vim.opt.termguicolors = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
+  pattern = "*",
+  callback = function()
+    vim.cmd('silent! write')
+  end,
+})
