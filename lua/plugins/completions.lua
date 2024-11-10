@@ -57,11 +57,11 @@ return {
           format = lspkind.cmp_format({
             mode = "symbol_text",
             maxwidth = 50,
-           ellipsis_char = "...",
+            ellipsis_char = "...",
             show_labelDetails = true,
           }),
         },
       })
-   end,
+    end,
   },
 }
