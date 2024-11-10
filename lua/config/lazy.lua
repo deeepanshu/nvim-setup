@@ -20,7 +20,10 @@ require("lazy").setup({
     { import = "plugins" },
   },
   checker = {
+    notify = false,
     enabled = true, -- check for plugin updates periodically
+  },
+  change_detection = {
     notify = false, -- notify on update
   },
   performance = {
@@ -40,4 +43,4 @@ require("lazy").setup({
   },
 })
 
-vim.api.nvim_set_keymap('n', '<leader>l', ':Lazy<CR>', { desc = "Open Lazy", noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>l", ":Lazy<CR>", { desc = "Open Lazy", noremap = true, silent = true })
