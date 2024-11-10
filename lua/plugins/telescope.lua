@@ -1,17 +1,27 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        depedencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+        },
         config = function()
+            local telescope = require("telescope")
+            local actions = require("telescope.actions")
             local builtin = require("telescope.builtin")
-            setKeymaps("n", "<leader>ff", builtin.find_files, "Find Files")
-            setKeymaps("n", "<leader>fs", builtin.live_grep, "Find String")
-            setKeymaps("n", "<leader>fb", builtin.buffers, "Telescope buffers")
-            setKeymaps("n", "<leader>fh", builtin.help_tags, "Telescope help tags")
 
-            require("telescope").setup({
+            telescope.setup({
                 defaults = {
+                    path_display = { "smart" },
                     file_ignore_patterns = { "node_modules", ".yarn" },
+                    mappings = {
+                        i = {
+                            ["<C-k>"] = actions.move_selection_previous,
+                            ["<C-j"] = actions.move_selection_next,
+                            ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                        },
+                    },
                 },
                 pickers = {
                     find_files = {
@@ -19,11 +29,21 @@ return {
                     },
                 },
                 extensions = {
-                    persisted = {
-                        layout_config = { width = 1, height = 0.55 },
+                    fzf = {
+                        fuzzy = true,
+                        override_generic_sorter = true, -- override the generic sorter
+                        override_file_sorter = true, -- override the file sorter
+                        case_mode = "smart_case",
                     },
                 },
             })
+
+            telescope.load_extension("fzf")
+            setKeymaps("n", "<leader>ff", builtin.find_files, "Find files")
+            setKeymaps("n", "<leader>fs", builtin.live_grep, "Find string in cwd")
+            setKeymaps("n", "<leader>fc", builtin.grep_string, "Find string under cursor in cwd")
+            setKeymaps("n", "<leader>fb", builtin.buffers, "Telescope buffers")
+            setKeymaps("n", "<leader>fh", builtin.help_tags, "Telescope help tags")
         end,
     },
     {
