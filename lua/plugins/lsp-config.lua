@@ -9,28 +9,72 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "ts_ls", "graphql"},
+                ensure_installed = { "lua_ls", "ts_ls", "graphql" },
             })
         end,
     },
     {
         "neovim/nvim-lspconfig",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            { "folke/neodev.nvim",                   opts = {} },
+            { "antosha417/nvim-lsp-file-operations", config = true },
+        },
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local mason_lspconfig = require("mason-lspconfig")
+            local cpm_nvim_lsp = require("cmp_nvim_lsp")
             local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup({
-                capabilities = capabilities,
+
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+                callback = function(ev)
+                    local opts = { buffer = ev.buf, silent = true }
+                    setKeymapOnBuf("n", "gr", "<cmd>Telescope lsp_references<CR>", "Show LSP references")
+                    setKeymapOnBuf("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+                    setKeymapOnBuf("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Show LSP definitions")
+                    setKeymapOnBuf("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "Show LSP implementations")
+                    setKeymapOnBuf("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "Show LSP type definitions")
+                    setKeymapOnBuf({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Show Code Actions")
+                    setKeymapOnBuf("n", "<leader>rn", vim.lsp.buf.rename, "Smart renamte")
+                    setKeymapOnBuf("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer diagnostics")
+                    setKeymapOnBuf("n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics")
+                    setKeymapOnBuf("n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic")
+                    setKeymapOnBuf("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic")
+                    setKeymapOnBuf("n", "K", vim.lsp.buf.hover, "Show documentation for under cursor")
+                    setKeymapOnBuf("n", "<leader>rs", ":LspRestart<CR>", "Restart LSP")
+                end,
             })
-            lspconfig.ts_ls.setup({
-                capabilities = capabilities,
+
+            local capabilities = cpm_nvim_lsp.default_capabilities()
+            local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+            for type, icon in pairs(signs) do
+                local hl = "DiagnosticSign" .. type
+                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+            end
+            mason_lspconfig.setup_handlers({
+                function(server_name)
+                    lspconfig[server_name].setup({
+                        capabilities = capabilities,
+                    })
+                end,
+                ["lua_ls"] = function()
+                    lspconfig["lua_ls"].setup({
+                        capabilities = capabilities,
+                        settings = {
+                            Lua = {
+                                -- make the language server recognize "vim" global
+                                diagnostics = {
+                                    globals = { "vim" },
+                                },
+                                completion = {
+                                    callSnippet = "Replace",
+                                },
+                            },
+                        },
+                    })
+                end,
             })
-            lspconfig.graphql.setup({
-                capabilities = capabilities,
-            })
-            setKeymaps("n", "K", vim.lsp.buf.hover, "Open Documentation")
-            setKeymaps("n", "gd", vim.lsp.buf.definition, "Go to definition")
-            setKeymaps("n", "gr", vim.lsp.buf.references, "Go to references")
-            setKeymaps("n", "<leader>ca", vim.lsp.buf.code_action, "Open Code Actions")
         end,
     },
 }
