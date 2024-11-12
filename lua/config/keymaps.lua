@@ -1,56 +1,21 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
+local keymap = vim.keymap
 
--- ###### neotests #####
--- for current test
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>tr",
-  '<cmd>lua require("neotest").run.run()<CR>',
-  { noremap = true, silent = true }
-)
--- for all tests in current file
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>tt",
-  '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>',
-  { noremap = true, silent = true }
-)
--- for the nearest test to cursor
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>tn",
-  '<cmd>lua require("neotest").run.run({strategy = "nearest"})<CR>',
-  { noremap = true, silent = true }
-)
--- for toggling the summary window
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>ts",
-  '<cmd>lua require("neotest").summary.toggle()<CR>',
-  { noremap = true, silent = true }
-)
--- for toggling the output_panel
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>tp",
-  '<cmd>lua require("neotest").output_panel.toggle()<CR>',
-  { noremap = true, silent = true }
-)
--- for toggling the output for single test
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>to",
-  '<cmd>lua require("neotest").output.open({ short = true })<CR>',
-  { noremap = true, silent = true }
-)
+function setKeymap(mode, key, command, desc)
+  keymap.set(mode, key, command, { desc = desc, silent = true, noremap = true })
+end
 
--- ##### code #####
--- format code
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>f",
-  "<cmd>lua vim.lsp.buf.format({ async = true })<CR>",
-  { noremap = true, silent = true }
-)
+function setKeymapOnBuf(mode, key, command, desc, buf)
+  keymap.set(mode, key, command, { buffer = buf, desc = desc, silent = true, noremap = true })
+end
+
+setKeymap("n", "<leader>sv", "<C-w>v", "Split window vertically")
+setKeymap("n", "<leader>sh", "<C-w>s", "Split window horizontally")
+setKeymap("n", "<leader>se", "<C-w>=", "Make splits equal")
+setKeymap("n", "<leader>sx", "<cmd>close<CR>", "Close current split")
+
+setKeymap("n", "<leader>to", "<cmd>tabnew<CR>", "Open new tab")
+setKeymap("n", "<leader>tx", "<cmd>tabclose<CR>", "Close current tab")
+setKeymap("n", "<leader>tn", "<cmd>tabn<CR>", "Go to next tab")
+setKeymap("n", "<leader>tp", "<cmd>tabp<CR>", "Go to previous tab")
+setKeymap("n", "<leader>tf", "<cmd>tabnew %<CR>", "Open current buffer in new tab")
+setKeymap("n", "<leader>l", ":Lazy<CR>", "Open Lazy")
