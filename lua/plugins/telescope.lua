@@ -49,6 +49,7 @@ return {
       setKeymap("n", "<leader>fc", builtin.grep_string, "Find string under cursor in cwd")
       setKeymap("n", "<leader>fb", builtin.buffers, "Telescope buffers")
       setKeymap("n", "<leader>fh", builtin.help_tags, "Telescope help tags")
+      setKeymap("n", "<leader>fr", builtin.resume, "Telescope Resume last search")
     end,
   },
   {
