@@ -10,6 +10,7 @@ vim.cmd("set number")
 vim.cmd("set relativenumber")
 vim.cmd("set clipboard+=unnamedplus")
 vim.cmd("set cursorline")
+vim.cmd("set hidden")
 vim.g.mapleader = " "
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -26,3 +27,11 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
     vim.cmd("silent! write")
   end,
 })
+
+vim.cmd[[
+augroup highlight_yank
+autocmd!
+au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=200})
+augroup END
+]]
+
