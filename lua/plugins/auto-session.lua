@@ -8,6 +8,12 @@ return {
         auto_session_restore = false,
         auto_session_supress_dirs = { "~/", "~/Desktop", "~/Downloads", "~/Documents", "~/Desktop/projects/" },
         use_git_branch = true,
+        pre_save_cmds = {
+          ":Neotree action=close",
+        },
+        post_restore_cmds = {
+          ":Neotree action=show",
+        },
       })
       setKeymap("n", "<leader>wf", "<cmd>SessionSearch<CR>", "Search Session")
       setKeymap("n", "<leader>wr", "<cmd>SessionRestore<CR>", "Restore session for cwd")
