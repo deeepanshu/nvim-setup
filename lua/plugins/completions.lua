@@ -32,11 +32,6 @@ return {
       local cmp = require("cmp")
       local lspkind = require("lspkind")
       local luasnip = require("luasnip")
-      lspkind.init({
-        symbol_map = {
-          Copilot = "",
-        },
-      })
       require("luasnip.loaders.from_vscode").lazy_load()
       cmp.setup({
         completion = {
@@ -73,6 +68,34 @@ return {
             maxwidth = 50,
             ellipsis_char = "...",
             show_labelDetails = true,
+            symbol_map = {
+              Copilot = "",
+              Text = "󰉿",
+              Method = "󰆧",
+              Function = "󰊕",
+              Constructor = "",
+              Field = "󰜢",
+              Variable = "󰀫",
+              Class = "󰠱",
+              Interface = "",
+              Module = "",
+              Property = "󰜢",
+              Unit = "󰑭",
+              Value = "󰎠",
+              Enum = "",
+              Keyword = "󰌋",
+              Snippet = "",
+              Color = "󰏘",
+              File = "󰈙",
+              Reference = "󰈇",
+              Folder = "󰉋",
+              EnumMember = "",
+              Constant = "󰏿",
+              Struct = "󰙅",
+              Event = "",
+              Operator = "󰆕",
+              TypeParameter = "",
+            },
           }),
         },
         sorting = {
