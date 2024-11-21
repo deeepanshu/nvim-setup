@@ -89,9 +89,9 @@ return {
           lint.try_lint()
         end,
       })
-            setKeymap("n", "<leader>cl", function ()
-                lint.try_lint()
-            end, "Trigger linting for current file")
+      setKeymap("n", "<leader>cl", function()
+        lint.try_lint()
+      end, "Trigger linting for current file")
     end,
   },
 }

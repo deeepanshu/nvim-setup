@@ -6,7 +6,23 @@ return {
         },
         dependencies = {
             "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
+            {
+                "rcarriga/nvim-notify",
+                config = function ()
+                    require("notify").setup({
+                        stages = "fade",
+                        timeout = 5000,
+                        background_colour = "#000000",
+                        icons = {
+                            ERROR = "",
+                            WARN = "",
+                            INFO = "",
+                            DEBUG = "",
+                            TRACE = "✎",
+                        },
+                    })
+                end
+            },
         },
         config = function()
             require("noice").setup({

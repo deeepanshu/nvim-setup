@@ -3,9 +3,9 @@
 -- Add any additional options here
 vim.o.autochdir = false
 vim.cmd("set expandtab")
-vim.cmd("set shiftwidth=4")
-vim.cmd("set tabstop=4")
-vim.cmd("set softtabstop=4")
+vim.cmd("set shiftwidth=2")
+vim.cmd("set tabstop=2")
+vim.cmd("set softtabstop=2")
 vim.cmd("set number")
 vim.cmd("set relativenumber")
 vim.cmd("set clipboard+=unnamedplus")
@@ -20,9 +20,9 @@ vim.opt.termguicolors = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
   pattern = "*",
   callback = function()
-    vim.cmd('silent! write')
+    vim.cmd("silent! write")
   end,
 })
