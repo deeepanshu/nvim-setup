@@ -18,8 +18,17 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      { "folke/neodev.nvim", opts = {} },
-      { "antosha417/nvim-lsp-file-operations", config = true },
+      {
+        "folke/lazydev.nvim",
+        opts = {}
+      },
+      {
+        "antosha417/nvim-lsp-file-operations",
+        dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-tree.lua" },
+        config = function()
+          require("lsp-file-operations").setup()
+        end,
+      },
     },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
