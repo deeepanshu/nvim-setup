@@ -28,7 +28,7 @@ return {
           width = 0.3,
         },
       })
-
+      setKeymap("n", "<leader>gt", ":CopilotChatToggle<CR>", "Toggle Copilot Chat")
     end,
   },
 }
