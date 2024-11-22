@@ -3,6 +3,10 @@ return {
     "scalameta/nvim-metals",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+			"hrsh7th/cmp-nvim-lsp",
+      "folke/noice.nvim",
+			"MunifTanjim/nui.nvim",
       {
         "mfussenegger/nvim-dap",
         config = function(self, opts)
@@ -32,6 +36,7 @@ return {
       },
     },
     ft = { "scala", "sbt", "java" },
+    build = ":MetalsInstall",
     opts = function()
       local metals_config = require("metals").bare_config()
       metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -39,7 +44,9 @@ return {
         showImplicitArguments = true,
         showImplicitConversionsAndClasses = true,
         showInferredType = true,
+        excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
       }
+      metals_config.find_root_dir_max_project_nesting = 2
       metals_config.init_options.statusBarProvider = "off"
       metals_config.on_attach = function(client, bufnr)
         local map = vim.keymap.set

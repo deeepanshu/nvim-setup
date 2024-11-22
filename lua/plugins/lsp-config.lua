@@ -20,7 +20,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       {
         "folke/lazydev.nvim",
-        opts = {}
+        opts = {},
       },
       {
         "antosha417/nvim-lsp-file-operations",
