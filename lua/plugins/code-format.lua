@@ -1,27 +1,9 @@
 return {
-  -- {
-  --   "lukas-reineke/indent-blankline.nvim",
-  --   main = "ibl",
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   opts = {},
-  --   config = function()
-  --     require("ibl").setup()
-  --   end,
-  -- },
   {
-    "numToStr/Comment.nvim",
-    dependencies = {
-      { "JoosepAlviste/nvim-ts-context-commentstring" },
-    },
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      local comment = require("Comment")
-      local ts_context_commentstring = require("ts_context_commentstring.integrations.comment_nvim")
-
-      comment.setup({
-        pre_hook = ts_context_commentstring.create_pre_hook(),
-      })
-    end,
+    "echasnovski/mini.comment",
+    event = "VeryLazy",
+    version = "*",
+    opts = {},
   },
   {
     "windwp/nvim-autopairs",

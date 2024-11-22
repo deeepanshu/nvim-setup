@@ -33,6 +33,8 @@ return {
       local lspkind = require("lspkind")
       local luasnip = require("luasnip")
       require("luasnip.loaders.from_vscode").lazy_load()
+      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
       cmp.setup({
         completion = {
           completeopt = "menu,menuone,preview,noselect",
@@ -103,8 +105,8 @@ return {
           priority_weight = 2,
           comparators = {
             require("copilot_cmp.comparators").prioritize,
-            cmp.config.compare.offset,
             cmp.config.compare.exact,
+            cmp.config.compare.offset,
             cmp.config.compare.score,
             cmp.config.compare.recently_used,
             cmp.config.compare.locality,
