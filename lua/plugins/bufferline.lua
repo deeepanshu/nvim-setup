@@ -2,17 +2,6 @@ return {
   {
     "akinsho/bufferline.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
-    -- keys = {
-    --   { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
-    --   { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
-    --   { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
-    --   { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
-    --   { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
-    --   { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-    --   { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-    --   { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-    --   { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-    -- },
     config = function()
       local bufferline = require("bufferline")
       bufferline.setup({
@@ -25,12 +14,6 @@ return {
             require("mini.bufremove").delete(n, false)
           end,
           diagnostics = "nvim_lsp",
-          diagnostics_indicator = function(_, _, diag)
-            local icons = require("lazyvim.config").icons.diagnostics
-            local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-              .. (diag.warning and icons.Warn .. diag.warning or "")
-            return vim.trim(ret)
-          end,
           indicator = {
             style = "underline",
           },
@@ -44,6 +27,15 @@ return {
           },
         },
       })
+      setKeymap("n", "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", "Toggle pin")
+      setKeymap("n", "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers")
+      setKeymap("n", "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", "Delete other buffers")
+      setKeymap("n", "<leader>br", "<Cmd>BufferLineCloseRight<CR>", "Delete buffers to the right")
+      setKeymap("n", "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", "Delete buffers to the left")
+      setKeymap("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", "Prev buffer")
+      setKeymap("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", "Next buffer")
+      setKeymap("n", "[b", "<cmd>BufferLineCyclePrev<cr>", "Prev buffer")
+      setKeymap("n", "]b", "<cmd>BufferLineCycleNext<cr>", "Next buffer")
       vim.api.nvim_create_autocmd("BufAdd", {
         callback = function()
           vim.schedule(function()
