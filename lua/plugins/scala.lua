@@ -119,8 +119,8 @@ return {
       return metals_config
     end,
     config = function(self, metals_config)
+      setKeymap("n", "<leader>fm", "<cmd>Telescope metals commands<CR>", "Open Metals Commands")
       local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-      print(self.ft)
       vim.api.nvim_create_autocmd("FileType", {
         pattern = self.ft,
         callback = function()
